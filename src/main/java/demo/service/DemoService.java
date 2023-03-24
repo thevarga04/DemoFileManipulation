@@ -30,14 +30,15 @@ public class DemoService {
       for (final var p : document.getParagraphs()) {
         for (final var run : p.getRuns()) {
           var text = run.getText(0);
-          if (text != null && text.contains(ID.placeholder)) {
-            ID.replace(run, text);
-          }
+          if (text != null) {
+            if (text.contains(ID.placeholder)) {
+              ID.replace(run, text);
+            }
 
-          if (text != null && text.contains(NAME.placeholder)) {
-            NAME.replace(run, text);
+            if (text.contains(NAME.placeholder)) {
+              NAME.replace(run, text);
+            }
           }
-
         }
       }
       document.write(outputStream);
