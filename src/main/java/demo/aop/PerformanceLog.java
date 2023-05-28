@@ -11,7 +11,9 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 @Slf4j
 public class PerformanceLog {
+
   private final ThreadLocal<AtomicInteger> depth = ThreadLocal.withInitial(AtomicInteger::new);
+
 
   @Pointcut("execution(* demo.api..*.*(..))")
   public void restMethods() {
@@ -34,6 +36,11 @@ public class PerformanceLog {
       }
       depth.get().getAndDecrement();
     }
-
   }
+
+  public void unload() {
+    depth.remove();
+  }
+
+
 }
